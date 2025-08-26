@@ -2,14 +2,17 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { Send, User, Bot, Heart, Star, Zap, Home, RotateCcw, ArrowLeft, MoreVertical, Clock } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 interface Message {
   id: string;
-  type: 'user' | 'ai' | 'system' | 'narration';
+  type: 'user' | 'ai' | 'system' | 'narration' | 'image';
   content: string;
   timestamp: Date;
   character?: string;
+  imageUrl?: string;
+  imageAlt?: string;
 }
 
 interface TurnMission {
@@ -47,11 +50,18 @@ export default function ChatPage() {
     {
       id: '2',
       type: 'narration',
-      content: '전장에서 항복하고 오크 군의 포로가 된 첫째 날. 적대 관계인 만큼 우호적인 대우를 받지 못할 수 있다는 예상을 하긴 했지만... 이놈들이 왜 밥을 안주지?',
+      content: '전장에서 항복하고 오크 군의 포로가 된 첫째 날. 적대 관계인 만큼 우호적인 대우를 받지 못할 수 있다는 예상을 하긴 했지만...',
       timestamp: new Date()
     },
     {
-      id: '3', 
+      id: '3',
+      type: 'image',
+      content: '',
+      imageUrl: '/images/turn1_1.png',
+      timestamp: new Date()
+    },
+    {
+      id: '4', 
       type: 'ai',
       content: '이봐, 포로에게는 식사 제공이 안 되는건가?',
       character: '7군 부사령관 엘프',
@@ -118,23 +128,44 @@ export default function ChatPage() {
           },
           {
             id: (Date.now() + 2).toString(),
+            type: 'image',
+            content: '',
+            imageUrl: '/images/turn1_2.png',
+            timestamp: new Date()
+          },
+          {
+            id: (Date.now() + 3).toString(),
             type: 'narration',
             content: '그때 옆에서 다른 오크가 끼어든다.',
             timestamp: new Date()
           },
           {
-            id: (Date.now() + 3).toString(),
+            id: (Date.now() + 4).toString(),
             type: 'ai',
             content: '야, 그건 4군 사령관이야.',
             character: '다른 오크',
             timestamp: new Date()
           },
           {
-            id: (Date.now() + 4).toString(),
-            type: 'narration',
-            content: '알고보니 오크들이 착오로 7군 부사령관을 굶겼고 밥안먹겠다는 4군 사령관에게는 밥을 넉넉히 제공하고 있었다.',
+            id: (Date.now() + 5).toString(),
+            type: 'image',
+            content: '',
+            imageUrl: '/images/turn1_3.png',
             timestamp: new Date()
-          }
+          },
+          {
+            id: (Date.now() + 6).toString(),
+            type: 'narration',
+            content: '알고보니 오크들이 착오로 7군 부사령관을 굶겼고 밥안먹겠다는 4군 사령관은 맛있게 밥을 먹고 있었다.',
+            timestamp: new Date()
+          },
+          {
+            id: (Date.now() + 7).toString(),
+            type: 'image',
+            content: '',
+            imageUrl: '/images/turn1_4.png',
+            timestamp: new Date()
+          },
         ];
         
         // 미션 진행도 업데이트 - 정답 선택시
@@ -200,7 +231,7 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="h-screen bg-black flex flex-col overflow-hidden">
+    <div className="h-screen bg-black flex flex-col">
       {/* Header - 크랙 스타일 */}
       <header className="bg-black border-b border-gray-800 flex-shrink-0">
         <div className="max-w-md mx-auto px-4 h-14 flex items-center justify-between">
@@ -225,7 +256,7 @@ export default function ChatPage() {
       </header>
 
       {/* Main Chat Interface */}
-      <div className="flex-1 flex flex-col max-w-md mx-auto w-full">
+      <div className="flex-1 flex flex-col max-w-md mx-auto w-full min-h-0">
         {/* Mission Banner */}
         <div className="bg-blue-900/50 border-b border-gray-800 p-3 flex-shrink-0">
           <div className="flex items-center gap-2 mb-1">
@@ -241,46 +272,59 @@ export default function ChatPage() {
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-3">
+        <div className="flex-1 overflow-y-auto p-4 space-y-3 min-h-0">
           {messages.map((message) => (
             <div
               key={message.id}
-              className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
+              className={`flex ${message.type === 'user' ? 'justify-end' : message.type === 'image' ? 'justify-center' : 'justify-start'}`}
             >
-              <div
-                className={`max-w-[280px] px-3 py-2 rounded-2xl ${
-                  message.type === 'user'
-                    ? 'bg-red-500 text-white rounded-br-md'
-                    : message.type === 'ai'
-                    ? 'bg-gray-800 text-gray-100 rounded-bl-md'
-                    : message.type === 'narration'
-                    ? 'bg-gray-600/70 text-gray-200 text-center mx-auto italic rounded-lg'
-                    : 'bg-blue-800/50 text-blue-200 text-center mx-auto rounded-lg'
-                }`}
-              >
-                {message.type === 'ai' && message.character && (
-                  <p className="text-xs text-gray-400 mb-1">{message.character}</p>
-                )}
-                
-                {message.type !== 'system' && (
-                  <p className={`text-sm leading-relaxed ${message.type === 'narration' ? 'text-xs' : ''}`}>
-                    {message.type === 'narration' ? `*${message.content}*` : message.content}
-                  </p>
-                )}
-                
-                {message.type === 'system' && (
-                  <p className="text-xs text-center font-medium">{message.content}</p>
-                )}
-                
-                {message.type !== 'system' && (
-                  <p className="text-xs opacity-60 mt-1">
-                    {message.timestamp.toLocaleTimeString('ko-KR', { 
-                      hour: '2-digit', 
-                      minute: '2-digit' 
-                    })}
-                  </p>
-                )}
-              </div>
+              {message.type === 'image' ? (
+                <div className="max-w-[280px] bg-gray-800 rounded-xl overflow-hidden flex-shrink-0">
+                  <Image
+                    src={message.imageUrl || '/images/placeholder.png'}
+                    alt={message.imageAlt || '웹툰 장면'}
+                    width={280}
+                    height={180}
+                    className="w-full h-auto"
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
+              ) : (
+                <div
+                  className={`max-w-[280px] px-3 py-2 rounded-2xl ${
+                    message.type === 'user'
+                      ? 'bg-red-500 text-white rounded-br-md'
+                      : message.type === 'ai'
+                      ? 'bg-gray-800 text-gray-100 rounded-bl-md'
+                      : message.type === 'narration'
+                      ? 'bg-gray-600/70 text-gray-200 text-center mx-auto italic rounded-lg'
+                      : 'bg-blue-800/50 text-blue-200 text-center mx-auto rounded-lg'
+                  }`}
+                >
+                  {message.type === 'ai' && message.character && (
+                    <p className="text-xs text-gray-400 mb-1">{message.character}</p>
+                  )}
+                  
+                  {message.type !== 'system' && (
+                    <p className={`text-sm leading-relaxed ${message.type === 'narration' ? 'text-xs' : ''}`}>
+                      {message.type === 'narration' ? `*${message.content}*` : message.content}
+                    </p>
+                  )}
+                  
+                  {message.type === 'system' && (
+                    <p className="text-xs text-center font-medium">{message.content}</p>
+                  )}
+                  
+                  {message.type !== 'system' && (
+                    <p className="text-xs opacity-60 mt-1">
+                      {message.timestamp.toLocaleTimeString('ko-KR', { 
+                        hour: '2-digit', 
+                        minute: '2-digit' 
+                      })}
+                    </p>
+                  )}
+                </div>
+              )}
             </div>
           ))}
           {isLoading && (
