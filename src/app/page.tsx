@@ -20,72 +20,83 @@ interface StoryCard {
 export default function Home() {
   const [stories] = useState<StoryCard[]>([
     {
-      id: '1',
-      title: '카페 알바생 유나',
-      character: '유나',
-      genre: ['로맨스', '일상'],
-      description: '조용한 카페에서 일하는 유나. 오늘도 손님들의 이야기를 들으며 하루를 보낸다.',
-      thumbnail: '☕',
-      progress: 25,
-      lastPlayed: '2시간 전',
-      relationship: 15
+      id: '6093218132590592',
+      title: '오크의 포로가 된 엘프 여사령관',
+      character: '엘프 여사령관',
+      genre: ['판타지', '드라마'],
+      description: '치열한 전쟁 끝에 오크군에 사로잡혀 버린 엘프 여사령관 이시르와 레나. 무자비한 엘프 포로와 가녀린 오크군의 파란만장한 병영 생활기!',
+      thumbnail: 'https://ccdn.lezhin.com/v2/comics/6093218132590592/images/tall.webp?width=130',
+      progress: 15,
+      lastPlayed: '30분 전',
+      relationship: 12
     },
     {
-      id: '2',
-      title: '마법소녀 아리엘',
-      character: '아리엘',
-      genre: ['판타지', '마법소녀'],
-      description: '세계를 구하는 마법소녀 아리엘. 하지만 그녀에게도 고민이 있다.',
-      thumbnail: '🔮',
+      id: '5310249108766720',
+      title: '아가씨와 우렁총각',
+      character: '아가씨',
+      genre: ['로맨스'],
+      description: '신분 차이를 뛰어넘는 아가씨와 우렁총각의 달콤한 로맨스 이야기.',
+      thumbnail: 'https://ccdn.lezhin.com/v2/comics/5310249108766720/images/tall.jpg?width=130',
+      progress: 45,
+      lastPlayed: '1시간 전',
+      relationship: 25
+    },
+    {
+      id: '5849944865636352',
+      title: '연필의 각도',
+      character: '홍자',
+      genre: ['로맨스'],
+      description: '작가 홍자의 감성 로맨스. 연필 하나로 시작된 특별한 만남.',
+      thumbnail: 'https://ccdn.lezhin.com/v2/comics/5849944865636352/images/tall.jpg?width=130',
+      progress: 78,
+      lastPlayed: '2일 전',
+      relationship: 65
+    },
+    {
+      id: '5162568727724032',
+      title: '못난이에게 꽃다발을',
+      character: '못난이',
+      genre: ['로맨스'],
+      description: '자신을 못나다고 생각하는 주인공에게 찾아온 예상치 못한 사랑.',
+      thumbnail: 'https://ccdn.lezhin.com/v2/comics/5162568727724032/images/tall.jpg?width=130',
       progress: 0,
       lastPlayed: '아직 시작 안함',
       relationship: 0,
       isNew: true
     },
     {
-      id: '3',
-      title: '해커 제로',
-      character: '제로',
-      genre: ['SF', '액션'],
-      description: '사이버 세계의 전설적인 해커. 정의를 위해 싸우는 디지털 의적.',
-      thumbnail: '💻',
-      progress: 60,
-      lastPlayed: '1일 전',
-      relationship: 45
-    },
-    {
-      id: '4',
-      title: '암살자 셀레나',
-      character: '셀레나',
-      genre: ['액션', '스릴러'],
-      description: '완벽한 임무 수행으로 유명한 암살자. 하지만 이번 타겟은 조금 다르다.',
-      thumbnail: '🗡️',
-      progress: 80,
+      id: '6170000663052288',
+      title: '신데렐라 리미트',
+      character: '신데렐라',
+      genre: ['로맨스'],
+      description: '현대판 신데렐라 이야기. 시간 제한이 있는 특별한 사랑.',
+      thumbnail: 'https://ccdn.lezhin.com/v2/comics/6170000663052288/images/tall.jpg?width=130',
+      progress: 32,
       lastPlayed: '3일 전',
-      relationship: 70
+      relationship: 18
     },
     {
-      id: '5',
-      title: '우주의사 레이',
-      character: '닥터 레이',
-      genre: ['SF', '의료'],
-      description: '우주 정거장의 유일한 의사. 생명을 구하는 것이 그의 사명이다.',
-      thumbnail: '🚀',
+      id: '6694684605874176',
+      title: '내가 원하는 건',
+      character: '정',
+      genre: ['로맨스'],
+      description: '진짜 원하는 것이 무엇인지 깨달아가는 과정을 그린 로맨스.',
+      thumbnail: 'https://ccdn.lezhin.com/v2/comics/6694684605874176/images/tall.jpg?width=130',
+      progress: 88,
+      lastPlayed: '12시간 전',
+      relationship: 72
+    },
+    {
+      id: '5662308507975680',
+      title: '하얀데레',
+      character: '하얀',
+      genre: ['로맨스'],
+      description: '순수해 보이지만 집착하는 그녀의 위험한 사랑 이야기.',
+      thumbnail: 'https://ccdn.lezhin.com/v2/comics/5662308507975680/images/tall.jpg?width=130',
       progress: 0,
       lastPlayed: '아직 시작 안함',
       relationship: 0,
       isNew: true
-    },
-    {
-      id: '6',
-      title: '몬스터헌터 카이',
-      character: '카이',
-      genre: ['액션', '모험'],
-      description: '몬스터를 사냥하는 최고의 헌터. 세계 평화를 지키는 영웅.',
-      thumbnail: '⚔️',
-      progress: 35,
-      lastPlayed: '5일 전',
-      relationship: 30
     }
   ]);
 
@@ -132,8 +143,22 @@ export default function Home() {
               <div className="flex gap-4">
                 {/* Character Avatar */}
                 <div className="flex-shrink-0">
-                  <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center text-2xl">
-                    {story.thumbnail}
+                  {story.thumbnail.startsWith('http') ? (
+                    <img
+                      src={story.thumbnail}
+                      alt={story.title}
+                      className="w-16 h-16 rounded-lg object-cover"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        target.nextElementSibling!.classList.remove('hidden');
+                      }}
+                    />
+                  ) : null}
+                  <div className={`w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center text-2xl ${
+                    story.thumbnail.startsWith('http') ? 'hidden' : ''
+                  }`}>
+                    {story.thumbnail.startsWith('http') ? '📖' : story.thumbnail}
                   </div>
                 </div>
 
