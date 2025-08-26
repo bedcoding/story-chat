@@ -7,12 +7,13 @@ import Link from 'next/link';
 
 interface Message {
   id: string;
-  type: 'user' | 'ai' | 'system' | 'narration' | 'image';
+  type: 'user' | 'ai' | 'system' | 'narration' | 'image' | 'button';
   content: string;
   timestamp: Date;
   character?: string;
   imageUrl?: string;
   imageAlt?: string;
+  buttonAction?: string;
 }
 
 interface TurnMission {
@@ -166,6 +167,13 @@ export default function ChatPage() {
             imageUrl: '/images/turn1_4.png',
             timestamp: new Date()
           },
+          {
+            id: (Date.now() + 8).toString(),
+            type: 'button',
+            content: '다음으로',
+            buttonAction: 'nextTurn',
+            timestamp: new Date()
+          },
         ];
         
         // 미션 진행도 업데이트 - 정답 선택시
@@ -197,6 +205,12 @@ export default function ChatPage() {
       setMessages(prev => [...prev, ...responses]);
       setIsLoading(false);
     }, 1500);
+  };
+
+  const handleButtonClick = (action: string) => {
+    if (action === 'nextTurn') {
+      // turn2로 이동하는 로직
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -276,7 +290,7 @@ export default function ChatPage() {
           {messages.map((message) => (
             <div
               key={message.id}
-              className={`flex ${message.type === 'user' ? 'justify-end' : message.type === 'image' ? 'justify-center' : 'justify-start'}`}
+              className={`flex ${message.type === 'user' ? 'justify-end' : message.type === 'image' || message.type === 'button' ? 'justify-center' : 'justify-start'}`}
             >
               {message.type === 'image' ? (
                 <div className="max-w-[280px] bg-gray-800 rounded-xl overflow-hidden flex-shrink-0">
@@ -289,6 +303,13 @@ export default function ChatPage() {
                     style={{ objectFit: 'cover' }}
                   />
                 </div>
+              ) : message.type === 'button' ? (
+                <button
+                  onClick={() => handleButtonClick(message.buttonAction!)}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl text-sm font-medium transition-colors shadow-lg"
+                >
+                  {message.content}
+                </button>
               ) : (
                 <div
                   className={`max-w-[280px] px-3 py-2 rounded-2xl ${
