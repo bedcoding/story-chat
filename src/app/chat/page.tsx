@@ -51,7 +51,7 @@ export default function ChatPage() {
     {
       id: '2',
       type: 'narration',
-      content: '전장에서 항복하고 오크 군의 포로가 된 첫째 날. 적대 관계인 만큼 우호적인 대우를 받지 못할 수 있다는 예상을 하긴 했지만...',
+      content: '전장에서 항복하고 오크 군의 포로가 된 첫째 날. 적대 관계인 만큼 우호적인 대우를 받지 못할 수 있다는 예상은 했지만...',
       timestamp: new Date()
     },
     {
