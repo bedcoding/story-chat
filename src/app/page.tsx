@@ -119,7 +119,7 @@ export default function Home() {
     <div className="min-h-screen bg-black">
       {/* Header - 크랙 스타일 */}
       <header className="bg-black border-b border-gray-800">
-        <div className="max-w-md mx-auto px-4 h-14 flex items-center justify-between">
+        <div className="max-w-md md:max-w-4xl lg:max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
           <button className="p-2">
             <Menu className="w-6 h-6 text-gray-400" />
           </button>
@@ -131,23 +131,24 @@ export default function Home() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-md mx-auto px-4 pb-8">
+      <main className="max-w-md md:max-w-4xl lg:max-w-6xl mx-auto px-4 pb-8">
         <div className="pt-6 pb-4">
           <p className="text-gray-400 text-sm">함께 스토리를 만들어갈 웹툰 캐릭터를 선택하세요</p>
         </div>
 
         {/* Character List */}
-        <div className="space-y-4">
+        <div className="space-y-4 md:grid md:grid-cols-2 md:gap-6 md:space-y-0 lg:grid-cols-3">
           {stories.map((story) => (
-            <div key={story.id} className="bg-gray-900 rounded-lg p-4 border border-gray-800">
-              <div className="flex gap-4">
+            <div key={story.id} className="bg-gray-900 rounded-lg p-4 border border-gray-800 flex flex-col h-full">
+              {/* Top Content Area */}
+              <div className="flex gap-4 flex-1">
                 {/* Character Avatar */}
                 <div className="flex-shrink-0">
                   {story.thumbnail.startsWith('http') ? (
                     <img
                       src={story.thumbnail}
                       alt={story.title}
-                      className="w-16 h-16 rounded-lg object-cover"
+                      className="w-16 h-16 md:w-20 md:h-20 rounded-lg object-cover"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         target.style.display = 'none';
@@ -155,7 +156,7 @@ export default function Home() {
                       }}
                     />
                   ) : null}
-                  <div className={`w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center text-2xl ${
+                  <div className={`w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center text-2xl md:text-3xl ${
                     story.thumbnail.startsWith('http') ? 'hidden' : ''
                   }`}>
                     {story.thumbnail.startsWith('http') ? '📖' : story.thumbnail}
@@ -163,9 +164,9 @@ export default function Home() {
                 </div>
 
                 {/* Character Info */}
-                <div className="flex-1 min-w-0">
+                <div className="flex-1 min-w-0 flex flex-col">
                   <div className="flex items-center gap-2 mb-1">
-                    <h3 className="text-white font-semibold text-lg">{story.character}</h3>
+                    <h3 className="text-white font-semibold text-lg md:text-xl">{story.character}</h3>
                     {story.isNew && (
                       <span className="bg-red-500 text-white px-2 py-0.5 rounded text-xs font-medium">
                         NEW
@@ -173,8 +174,8 @@ export default function Home() {
                     )}
                   </div>
                   
-                  <p className="text-gray-400 text-sm mb-2">{story.title}</p>
-                  <p className="text-gray-300 text-sm leading-relaxed mb-3">{story.description}</p>
+                  <p className="text-gray-400 text-sm md:text-base mb-2">{story.title}</p>
+                  <p className="text-gray-300 text-sm md:text-base leading-relaxed mb-3">{story.description}</p>
 
                   {/* Genres */}
                   <div className="flex flex-wrap gap-1 mb-3">
@@ -204,17 +205,17 @@ export default function Home() {
                       <span>{story.lastPlayed}</span>
                     </div>
                   </div>
-
-                  {/* Play Button */}
-                  <Link
-                    href={`/chat?story=${story.id}`}
-                    className="w-full bg-red-500 hover:bg-red-600 text-white py-2.5 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
-                  >
-                    <Play className="w-4 h-4" />
-                    {story.progress > 0 ? '계속하기' : '시작하기'}
-                  </Link>
                 </div>
               </div>
+
+              {/* Fixed Bottom Button */}
+              <Link
+                href={`/chat?story=${story.id}`}
+                className="w-full bg-red-500 hover:bg-red-600 text-white py-2.5 md:py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 mt-4"
+              >
+                <Play className="w-4 h-4" />
+                {story.progress > 0 ? '계속하기' : '시작하기'}
+              </Link>
             </div>
           ))}
         </div>

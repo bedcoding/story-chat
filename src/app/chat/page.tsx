@@ -248,7 +248,7 @@ export default function ChatPage() {
     <div className="h-screen bg-black flex flex-col">
       {/* Header - 크랙 스타일 */}
       <header className="bg-black border-b border-gray-800 flex-shrink-0">
-        <div className="max-w-md mx-auto px-4 h-14 flex items-center justify-between">
+        <div className="max-w-md md:max-w-4xl lg:max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
           <Link href="/" className="p-2">
             <ArrowLeft className="w-6 h-6 text-gray-400" />
           </Link>
@@ -270,7 +270,7 @@ export default function ChatPage() {
       </header>
 
       {/* Main Chat Interface */}
-      <div className="flex-1 flex flex-col max-w-md mx-auto w-full min-h-0">
+      <div className="flex-1 flex flex-col max-w-md md:max-w-4xl lg:max-w-6xl mx-auto w-full min-h-0">
         {/* Mission Banner */}
         <div className="bg-blue-900/50 border-b border-gray-800 p-3 flex-shrink-0">
           <div className="flex items-center gap-2 mb-1">
@@ -286,20 +286,20 @@ export default function ChatPage() {
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-3 min-h-0">
+        <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-3 min-h-0">
           {messages.map((message) => (
             <div
               key={message.id}
               className={`flex ${message.type === 'user' ? 'justify-end' : message.type === 'image' || message.type === 'button' ? 'justify-center' : 'justify-start'}`}
             >
               {message.type === 'image' ? (
-                <div className="max-w-[280px] bg-gray-800 rounded-xl overflow-hidden flex-shrink-0">
+                <div className="max-w-[280px] md:max-w-[400px] lg:max-w-[500px] bg-gray-800 rounded-xl overflow-hidden flex-shrink-0">
                   <Image
                     src={message.imageUrl || '/images/placeholder.png'}
                     alt={message.imageAlt || '웹툰 장면'}
                     width={280}
                     height={180}
-                    className="w-full h-auto"
+                    className="w-full h-auto md:max-w-[400px] lg:max-w-[500px]"
                     style={{ objectFit: 'cover' }}
                   />
                 </div>
@@ -312,7 +312,7 @@ export default function ChatPage() {
                 </button>
               ) : (
                 <div
-                  className={`max-w-[280px] px-3 py-2 rounded-2xl ${
+                  className={`max-w-[280px] md:max-w-[400px] lg:max-w-[500px] px-3 py-2 md:px-4 md:py-3 rounded-2xl ${
                     message.type === 'user'
                       ? 'bg-red-500 text-white rounded-br-md'
                       : message.type === 'ai'
@@ -327,7 +327,7 @@ export default function ChatPage() {
                   )}
                   
                   {message.type !== 'system' && (
-                    <p className={`text-sm leading-relaxed ${message.type === 'narration' ? 'text-xs' : ''}`}>
+                    <p className={`text-sm md:text-base leading-relaxed ${message.type === 'narration' ? 'text-xs md:text-sm' : ''}`}>
                       {message.type === 'narration' ? `*${message.content}*` : message.content}
                     </p>
                   )}
@@ -369,7 +369,7 @@ export default function ChatPage() {
             onClick={() => setShowAutoOptions(false)}
           >
             <div 
-              className="bg-gray-900 border border-gray-700 rounded-t-2xl w-full max-w-md mx-auto p-4 space-y-3 transform transition-transform duration-300"
+              className="bg-gray-900 border border-gray-700 rounded-t-2xl w-full max-w-md md:max-w-2xl mx-auto p-4 space-y-3 transform transition-transform duration-300"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between mb-3">
@@ -403,7 +403,7 @@ export default function ChatPage() {
         )}
 
         {/* Input Area */}
-        <div className="border-t border-gray-800 bg-black p-4 flex-shrink-0">
+        <div className="border-t border-gray-800 bg-black p-4 md:p-6 flex-shrink-0">
           <div className="flex gap-2">
             <input
               type="text"
@@ -411,18 +411,18 @@ export default function ChatPage() {
               onChange={(e) => setInputValue(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="직접 입력하거나 자동생성을 사용하세요..."
-              className="flex-1 bg-gray-800 border border-gray-700 rounded-full px-4 py-2.5 text-white placeholder-gray-400 focus:outline-none focus:border-red-500 text-sm"
+              className="flex-1 bg-gray-800 border border-gray-700 rounded-full px-4 py-2.5 md:px-6 md:py-3 text-white placeholder-gray-400 focus:outline-none focus:border-red-500 text-sm md:text-base"
             />
             <button
               onClick={() => setShowAutoOptions(!showAutoOptions)}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2.5 rounded-full transition-colors flex items-center gap-1"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2.5 md:px-4 md:py-3 rounded-full transition-colors flex items-center gap-1"
             >
               <Zap className="w-4 h-4" />
             </button>
             <button
               onClick={() => handleSendMessage()}
               disabled={!inputValue.trim() || isLoading}
-              className="bg-red-500 hover:bg-red-600 disabled:bg-gray-600 text-white p-2.5 rounded-full transition-colors"
+              className="bg-red-500 hover:bg-red-600 disabled:bg-gray-600 text-white p-2.5 md:p-3 rounded-full transition-colors"
             >
               <Send className="w-5 h-5" />
             </button>
