@@ -24,7 +24,7 @@ export default function Home() {
       title: '오크의 포로가 된 엘프 여사령관',
       character: '엘프 여사령관',
       genre: ['판타지', '드라마'],
-      description: '치열한 전쟁 끝에 오크군에 사로잡혀 버린 엘프 여사령관 이시르와 레나. 무자비한 엘프 포로와 가녀린 오크군의 파란만장한 병영 생활기!',
+      description: '치열한 전쟁 끝에 오크군에 사로잡혀 버린 엘프 여사령관 이시르와 레나. 무자비한 엘프 포로와 가녀린 오크군의 파란만장한 병영 생활',
       thumbnail: 'https://ccdn.lezhin.com/v2/comics/6093218132590592/images/tall.webp?width=130',
       progress: 15,
       lastPlayed: '30분 전',
